@@ -3,6 +3,7 @@ package se.lexicon.dao;
 import se.lexicon.model.Student;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -70,6 +71,14 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean delete(Student student) {
-        return students.remove(student);
+        Iterator<Student> iterator = students.iterator();
+        while (iterator.hasNext()) {
+            Student s = iterator.next();
+            if (s.getId() == student.getId()) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
     }
 }

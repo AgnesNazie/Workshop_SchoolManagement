@@ -6,16 +6,15 @@ import java.util.List;
 
 public class Course {
     //fields
-    private static int sequencer = 0;
-    private final int id;
+    private int id;
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
     private final List<Student> students;
     //constructor
 
-    public Course(String courseName, LocalDate startDate, int weekDuration) {
-        this.id = ++sequencer;
+    public Course(int id,String courseName, LocalDate startDate, int weekDuration) {
+        this.id = id;
         setCourseName(courseName);
         this.startDate = startDate;
         this.weekDuration = weekDuration;
@@ -25,6 +24,10 @@ public class Course {
 
     public int getId() {
         return id;
+    }
+    // setter for Id
+    public void setId(int id){
+        this.id = id;
     }
     //getter for courseName
 

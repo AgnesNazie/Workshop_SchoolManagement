@@ -2,15 +2,14 @@ package se.lexicon.model;
 
 public class Student {
     //fields
-    private static int sequencer = 0;
-    private final int id;
+    private int id;
     private String name;
     private String email;
     private String address;
     //constructor
 
-    public Student(String name, String email, String address) {
-        this.id = ++sequencer;
+    public Student(int id, String name, String email, String address) {
+        this.id = id;
         setName(name);
         setEmail(email);
         setAddress(address);
@@ -19,6 +18,11 @@ public class Student {
 
     public int getId() {
         return id;
+    }
+
+    //setter for id
+    public void setId(int id) {
+        this.id = id;
     }
     //getter for name
 
@@ -56,6 +60,7 @@ public class Student {
             throw new IllegalArgumentException("Address cannot be null or empty");
         this.address = address;
     }
+
     //to string method
     @Override
     public String toString() {
