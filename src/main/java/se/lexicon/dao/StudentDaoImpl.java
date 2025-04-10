@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class StudentDaoImpl implements StudentDao {
-    private List<Student> students = new ArrayList<>();
+    private final List<Student> students = new ArrayList<>();
 
     //save method
     @Override

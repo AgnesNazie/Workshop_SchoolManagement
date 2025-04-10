@@ -7,11 +7,11 @@ import java.util.List;
 public class Course {
     //fields
     private static int sequencer = 0;
-    private int id;
+    private final int id;
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
-    private List<Student> students;
+    private final List<Student> students;
     //constructor
 
     public Course(String courseName, LocalDate startDate, int weekDuration) {
@@ -63,13 +63,26 @@ public class Course {
     public List<Student> getStudents() {
         return students;
     }
+
     //method for managing students
-    public void register(Student student){
+    public void register(Student student) {
         if (!students.contains(student)) {
             students.add(student);
         }
     }
-    public void unregister(Student student){
+
+    public void unregister(Student student) {
         students.remove(student);
+    }
+    // string to string method
+
+    @Override
+    public String toString() {
+        return "Course ID: " + id +
+                ", courseName='" + courseName +
+                ", startDate=" + startDate +
+                ", weekDuration=" + weekDuration +
+                ", students=" + students;
+
     }
 }

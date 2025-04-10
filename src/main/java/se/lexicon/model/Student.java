@@ -3,7 +3,7 @@ package se.lexicon.model;
 public class Student {
     //fields
     private static int sequencer = 0;
-    private int id;
+    private final int id;
     private String name;
     private String email;
     private String address;
@@ -56,4 +56,13 @@ public class Student {
             throw new IllegalArgumentException("Address cannot be null or empty");
         this.address = address;
     }
+    //to string method
+    @Override
+    public String toString() {
+        return "Student ID: " + id +
+                ", Name='" + name +
+                ", email='" + email +
+                ", address='" + address;
+    }
 }
+
