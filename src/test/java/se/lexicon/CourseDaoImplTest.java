@@ -7,7 +7,6 @@ import se.lexicon.model.Course;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
