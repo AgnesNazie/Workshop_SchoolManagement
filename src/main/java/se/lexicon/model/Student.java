@@ -2,7 +2,7 @@ package se.lexicon.model;
 
 public class Student {
     //fields
-    private int id;
+    private final int id;
     private String name;
     private String email;
     private String address;
@@ -18,11 +18,6 @@ public class Student {
 
     public int getId() {
         return id;
-    }
-
-    //setter for id
-    public void setId(int id) {
-        this.id = id;
     }
     //getter for name
 

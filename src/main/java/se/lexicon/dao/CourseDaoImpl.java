@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 public class CourseDaoImpl implements CourseDao {
     private final List<Course> courses = new ArrayList<>();
@@ -76,7 +75,6 @@ public class CourseDaoImpl implements CourseDao {
                 return true;
             }
         }
-        ;
         return false;
     }
 }

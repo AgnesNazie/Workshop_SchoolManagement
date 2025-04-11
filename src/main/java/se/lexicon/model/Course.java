@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Course {
     //fields
-    private int id;
+    private final int id;
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
@@ -24,10 +24,6 @@ public class Course {
 
     public int getId() {
         return id;
-    }
-    // setter for Id
-    public void setId(int id){
-        this.id = id;
     }
     //getter for courseName
 
