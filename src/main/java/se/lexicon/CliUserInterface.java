@@ -1,93 +1,120 @@
 package se.lexicon;
 
-import se.lexicon.dao.CourseDao;
-import se.lexicon.dao.CourseDaoImpl;
-import se.lexicon.dao.StudentDao;
-import se.lexicon.dao.StudentDaoImpl;
-import se.lexicon.model.Course;
-import se.lexicon.model.Student;
-
-import java.time.LocalDate;
 import java.util.Scanner;
 
+
 public class CliUserInterface {
-    // Create Scanner object to read user input
     private static final Scanner scanner = new Scanner(System.in);
 
-    //create a menu
-
     public static void displayMenu() {
-        System.out.println("Welcome to the Student and Course Management System");
+        System.out.println("\nWelcome to the Student and Course Management System");
         System.out.println("1. Add Student");
         System.out.println("2. Add Course");
         System.out.println("3. View All Students");
         System.out.println("4. View All Courses");
-        System.out.println("5. Exit");
+        System.out.println("5. Search for Student by Name");
+        System.out.println("6. Search for Course by Name");
+        System.out.println("7. Edit Student");
+        System.out.println("8. Edit Course");
+        System.out.println("9. Delete Student");
+        System.out.println("10.Delete Course");
+        System.out.println("11.Register Student to Course");
+        System.out.println("12.Remove Student from Course");
+        System.out.println("13.Exit");
         System.out.print("Please select an option: ");
     }
 
     public static void main(String[] args) {
-        // Initialize the Student and Course DAOs
-
-        StudentDao studentDao = new StudentDaoImpl();
-        CourseDao courseDao = new CourseDaoImpl();
-
-        // Infinite loop for the menu
         while (true) {
             displayMenu();
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine();  // Consume the newline
 
             switch (choice) {
                 case 1:
-                    // Add a student
-                    System.out.print("Enter Student ID: ");
-                    int studentId = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
                     System.out.print("Enter Student Name: ");
                     String studentName = scanner.nextLine();
                     System.out.print("Enter Student Email: ");
                     String studentEmail = scanner.nextLine();
                     System.out.print("Enter Student Address: ");
                     String studentAddress = scanner.nextLine();
-                    studentDao.save(new Student(studentId, studentName, studentEmail, studentAddress));
-                    System.out.println("Student added successfully!");
+                    StudentCourseManager.addStudent(studentName, studentEmail, studentAddress);
                     break;
                 case 2:
-                    // Add a course
-                    System.out.print("Enter Course ID: ");
-                    int courseId = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
                     System.out.print("Enter Course Name: ");
                     String courseName = scanner.nextLine();
-                    System.out.print("Enter Start Date (yyyy-MM-dd): ");
+                    System.out.print("Enter Start Date (YYYY-MM-DD): ");
                     String startDate = scanner.nextLine();
-                    System.out.print("Enter Week Duration: ");
-                    int weekDuration = scanner.nextInt();
-                    courseDao.save(new Course(courseId, courseName, LocalDate.parse(startDate), weekDuration));
-                    System.out.println("Course added successfully!");
+                    System.out.print("Enter Duration in Weeks: ");
+                    int duration = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    StudentCourseManager.addCourse(courseName, startDate, duration);
                     break;
                 case 3:
-                    // View all students
-                    System.out.println("Students:");
-                    for (Student student : studentDao.findAll()) {
-                        System.out.println(student);
-                    }
+                    StudentCourseManager.viewAllStudents();
                     break;
                 case 4:
-                    // View all courses
-                    System.out.println("Courses:");
-                    for (Course course : courseDao.findAll()) {
-                        System.out.println(course);
-                    }
+                    StudentCourseManager.viewAllCourses();
                     break;
                 case 5:
+                    System.out.print("Enter Student Name to search: ");
+                    String studentSearchName = scanner.nextLine();
+                    StudentCourseManager.searchStudentByName(studentSearchName);
+                    break;
+                case 6:
+                    System.out.print("Enter Course Name to search: ");
+                    String courseSearchName = scanner.nextLine();
+                    StudentCourseManager.searchCourseByName(courseSearchName);
+                    break;
+                case 7:
+                    System.out.print("Enter Student ID to edit: ");
+                    int studentIdToEdit = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    System.out.print("Enter new Student Name: ");
+                    String newStudentName = scanner.nextLine();
+                    StudentCourseManager.editStudent(studentIdToEdit, newStudentName);
+                    break;
+                case 8:
+                    System.out.print("Enter Course ID to edit: ");
+                    int courseIdToEdit = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    System.out.print("Enter new Course Name: ");
+                    String newCourseName = scanner.nextLine();
+                    StudentCourseManager.editCourse(courseIdToEdit, newCourseName);
+                    break;
+                case 9:
+                    System.out.print("Enter Student ID to delete: ");
+                    int studentIdToDelete = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    StudentCourseManager.deleteStudent(studentIdToDelete);
+                    break;
+                case 10:
+                    System.out.print("Enter Course ID to delete: ");
+                    int courseIdToDelete = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    StudentCourseManager.deleteCourse(courseIdToDelete);
+                    break;
+                case 11:
+                    System.out.print("Enter Student ID: ");
+                    int studentIdToRegister = scanner.nextInt();
+                    System.out.print("Enter Course ID: ");
+                    int courseIdToRegister = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    StudentCourseManager.registerStudentToCourse(studentIdToRegister, courseIdToRegister);
+                    break;
+                case 12:
+                    System.out.print("Enter Student ID: ");
+                    int studentIdToRemove = scanner.nextInt();
+                    System.out.print("Enter Course ID: ");
+                    int courseIdToRemove = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    StudentCourseManager.removeStudentFromCourse(studentIdToRemove, courseIdToRemove);
+                    break;
+                case 13:
                     System.out.println("Exiting...");
                     return;
                 default:
-                    System.out.println("Invalid option, please try again.");
-
-
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
